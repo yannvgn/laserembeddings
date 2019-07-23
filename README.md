@@ -98,7 +98,7 @@ The following features have not been implemented yet:
 
 Some slight (and not so slight 🙄) differences exist for some languages due to differences in the implementation of the Tokenizer.
 
-**[An exhaustive comparison of the embeddings generated with LASER and laserembeddings](tests/report/embeddings-similarity.md) is automatically generated and will be updated for each new release.**
+**[An exhaustive comparison of the embeddings generated with LASER and laserembeddings](tests/report/comparison-with-LASER.md) is automatically generated and will be updated for each new release.**
 
 ## FAQ
 
