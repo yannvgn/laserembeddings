@@ -28,7 +28,7 @@ pip install laserembeddings
 python -m laserembeddings download-models
 ```
 
-This will download the models to the default `data` directory next to the source code of the package. Use `python -m laserembeddings download-models path/to/model/directory` to download the models to a specific location
+This will download the models to the default `data` directory next to the source code of the package. Use `python -m laserembeddings download-models path/to/model/directory` to download the models to a specific location.
 
 ### Usage
 
