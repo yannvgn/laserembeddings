@@ -1,0 +1,13 @@
+[MESSAGES CONTROL]
+disable=
+    line-too-long,
+    trailing-whitespace,
+    missing-docstring,
+    too-many-locals,
+    too-many-instance-attributes,
+    invalid-name,
+    too-few-public-methods,
+    too-many-arguments,
+
+[TYPECHECK]
+ignored-modules=numpy,torch
