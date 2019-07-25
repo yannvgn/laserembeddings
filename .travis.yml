@@ -1,0 +1,13 @@
+dist: xenial
+language: python
+python:
+  - "3.6"
+  - "3.7"
+before_install:
+  - pip install poetry
+install:
+  - poetry install -v
+  - python -m laserembeddings download-models
+script:
+  - poetry run pylint laserembeddings
+  - poetry run pytest
