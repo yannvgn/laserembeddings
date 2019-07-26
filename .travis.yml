@@ -6,7 +6,7 @@ python:
 before_install:
   - pip install poetry
 install:
-  - poetry update -n
+  - rm poetry.lock # necessary because locked torch version has no linux wheel
   - poetry install -n
   - python -m laserembeddings download-models
 script:
