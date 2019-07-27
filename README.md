@@ -1,6 +1,6 @@
 # LASER embeddings
 
-![Travis (.com)](https://img.shields.io/travis/com/yannvgn/laserembeddings.svg?style=flat-square) ![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square) ![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)
+![Travis (.org)](https://img.shields.io/travis/yannvgn/laserembeddings?style=flat-square) ![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square) ![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)
 
 laserembeddings is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 

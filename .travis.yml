@@ -6,7 +6,10 @@ python:
 before_install:
   - pip install poetry
 install:
-  - poetry install -v
+  - if [[ `python --version` =~ 'Python 3.6' ]]; then pip install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp36-cp36m-linux_x86_64.whl; fi
+  - if [[ `python --version` =~ 'Python 3.7' ]]; then pip install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp37-cp37m-linux_x86_64.whl; fi
+  - poetry remove torch -n # fix: latest torch wheel (1.1.0.post2) not available for linux
+  - poetry install -n
   - python -m laserembeddings download-models
 script:
   - poetry run pylint laserembeddings
