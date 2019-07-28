@@ -1,6 +1,6 @@
 # LASER embeddings
 
-![Travis (.org)](https://img.shields.io/travis/yannvgn/laserembeddings?style=flat-square) ![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square) ![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)
+![Travis (.org) branch](https://img.shields.io/travis/yannvgn/laserembeddings/master?style=flat-square) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/laserembeddings?style=flat-square) ![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square) ![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)
 
 laserembeddings is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
@@ -17,6 +17,8 @@ That is great, especially if you don't have training sets for the language(s) yo
 👉 👉 👉 For detailed information, have a look at the amazing [LASER repository](https://github.com/facebookresearch/LASER), read its [presentation article](https://code.fb.com/ai-research/laser-multilingual-sentence-embeddings/) and its [research paper](https://arxiv.org/abs/1812.10464). 👈 👈 👈
 
 ## Getting started
+
+You'll need Python 3.6 or higher.
 
 ### Installation
 
