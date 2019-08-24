@@ -45,9 +45,9 @@ class sre_performance_patch:
     def __enter__(self):
         import sys
 
-        if (0x03070000 <= sys.hexversion <= 0x030704f0
-                or 0x03080000 <= sys.hexversion <= 0x030800b3
-            ) and self.original_sre_parse_uniq is None:
+        if self.original_sre_parse_uniq is None and (
+                0x03070000 <= sys.hexversion <= 0x030704f0
+                or 0x03080000 <= sys.hexversion <= 0x030800b3):
             try:
                 import sre_parse
                 self.sre_parse = sre_parse
