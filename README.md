@@ -7,6 +7,10 @@
 
 laserembeddings is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
+🎁 **Version 0.1.2 is out. What's new?**
+- Korean is now fully supported ✅
+- A [bug](https://bugs.python.org/issue37723) in Python 3.7 (<= 3.7.4) and 3.8 (<= 3.8.0 beta 3) affecting the tokenizer performance was patched as a temporary solution until next Python releases 🐛
+
 ## Context
 
 [LASER](https://github.com/facebookresearch/LASER) is a collection of scripts and models created by Facebook Research to compute **multilingual sentence embeddings** for zero-shot cross-lingual transfer. 
