@@ -5,6 +5,7 @@ import numpy as np
 
 from .preprocessing import Tokenizer, BPE
 from .embedding import BPESentenceEmbedding
+from .utils import sre_performance_patch
 
 __all__ = ['Laser']
 
@@ -98,12 +99,13 @@ class Laser:
         Returns:
             np.ndarray: A N * 1024 NumPy array containing the embeddings, N being the number of sentences provided.
         """
-        sentence_tokens = [
-            self._get_tokenizer(lang).tokenize(sentence)
-            for sentence in sentences
-        ]
-        bpe_encoded = [
-            self.bpe.encode_tokens(tokens) for tokens in sentence_tokens
-        ]
+        with sre_performance_patch():  # see https://bugs.python.org/issue37723
+            sentence_tokens = [
+                self._get_tokenizer(lang).tokenize(sentence)
+                for sentence in sentences
+            ]
+            bpe_encoded = [
+                self.bpe.encode_tokens(tokens) for tokens in sentence_tokens
+            ]
 
-        return self.bpeSentenceEmbedding.embed_bpe_sentences(bpe_encoded)
+            return self.bpeSentenceEmbedding.embed_bpe_sentences(bpe_encoded)
