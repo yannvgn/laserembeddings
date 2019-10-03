@@ -43,6 +43,7 @@ class sre_performance_patch:
         self.original_sre_parse_uniq = None
 
     def __enter__(self):
+        #pylint: disable=import-outside-toplevel
         import sys
 
         if self.original_sre_parse_uniq is None and (
