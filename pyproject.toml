@@ -14,6 +14,7 @@ torch = "^1.0.1.post2"
 subword-nmt = "^0.3.6"
 numpy = "^1.15.4"
 sacremoses = "0.0.35"
+transliterate = "1.10.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
