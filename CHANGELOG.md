@@ -1,3 +1,8 @@
+<a name="0.1.3"></a>
+# [0.1.3](https://github.com/yannvgn/laserembeddings/compare/v0.1.2...v0.1.3) (2019-10-03)
+
+- A lot of languages that were only partially supported are now fully supported (br, bs, ceb, fr, gl, oc, ug, vi) 🌍
+
 <a name="0.1.2"></a>
 # [0.1.2](https://github.com/yannvgn/laserembeddings/compare/v0.1.1...v0.1.2) (2019-08-24)
 
