@@ -6,6 +6,13 @@ from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
 
 from .utils import BPECodesAdapter
 
+# Extras
+try:
+    import jieba
+    jieba.setLogLevel(60)
+except ImportError:
+    jieba = None
+
 __all__ = ['Tokenizer', 'BPE']
 
 ###############################################################################
@@ -41,13 +48,16 @@ class Tokenizer:
         if lang == 'jpn':
             lang = 'ja'
 
-        if lang == 'zh':
-            raise NotImplementedError('jieba is not yet implemented')
+        if lang == 'zh' and jieba is None:
+            raise ModuleNotFoundError(
+                '''No module named 'jieba'. Install laserembeddings with 'zh' extra to fix that: "pip install laserembeddings[zh]"'''
+            )
         if lang == 'ja':
             raise NotImplementedError('mecab is not yet implemented')
         if romanize:
             raise NotImplementedError('romanize is not yet implemented')
 
+        self.lang = lang
         self.lower_case = lower_case
         self.romanize = romanize
         self.descape = descape
@@ -79,6 +89,9 @@ class Tokenizer:
                                        aggressive_dash_splits=False)
 
         # jieba
+        if self.lang == 'zh':
+            text = ' '.join(jieba.cut(text.rstrip('\r\n')))
+
         # MECAB
         # ROMAN_LC
         # not implemented

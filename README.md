@@ -99,7 +99,6 @@ Here's a summary of the differences:
 
 The following features have not been implemented yet:
 - romanize, needed to process Greek (el)
-- Chinese text segmentation, needed to process Chinese (zh, cmn, wuu and yue)
 - Japanese text segmentation, needed to process Japanese (ja, jpn)
 
 ## Will I get the exact same embeddings?

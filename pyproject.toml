@@ -14,11 +14,15 @@ torch = "^1.0.1.post2"
 subword-nmt = "^0.3.6"
 numpy = "^1.15.4"
 sacremoses = "0.0.35"
+jieba = { version = "0.39", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
 yapf = "^0.27.0"
 pylint = "^2.3"
+
+[tool.poetry.extras]
+zh = ["jieba"]
 
 [build-system]
 requires = ["poetry>=0.12"]
