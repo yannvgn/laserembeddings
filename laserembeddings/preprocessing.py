@@ -69,7 +69,6 @@ class Tokenizer:
             text = xml_unescape(text)
 
         # MOSES_TOKENIZER
-
         # see: https://github.com/facebookresearch/LASER/issues/55#issuecomment-480881573
         text = self.tokenizer.tokenize(text,
                                        return_str=True,
@@ -80,6 +79,7 @@ class Tokenizer:
         # MECAB
         # not implemented
 
+        # ROMAN_LC
         if self.romanize:
             text = translit(text, self.lang, reversed=True)
 
