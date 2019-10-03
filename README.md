@@ -32,6 +32,13 @@ You'll need Python 3.6 or higher.
 pip install laserembeddings
 ```
 
+To install laserembeddings with extra dependencies:
+
+```
+# if you need Chinese support:
+pip install laserembeddings[zh]
+```
+
 ### Downloading the pre-trained models
 
 ```
