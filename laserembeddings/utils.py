@@ -1,6 +1,6 @@
 from typing import TextIO
 
-__all__ = ['BPECodesAdapter']
+__all__ = ['BPECodesAdapter', 'sre_performance_patch']
 
 
 class BPECodesAdapter:
