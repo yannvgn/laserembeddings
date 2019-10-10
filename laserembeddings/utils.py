@@ -12,7 +12,7 @@ class sre_performance_patch:
         self.original_sre_parse_uniq = None
 
     def __enter__(self):
-        # pylint: disable=import-outside-toplevel
+        #pylint: disable=import-outside-toplevel
         import sys
 
         if self.original_sre_parse_uniq is None and (
@@ -21,7 +21,7 @@ class sre_performance_patch:
             try:
                 import sre_parse
                 self.sre_parse = sre_parse
-                # pylint: disable=protected-access
+                #pylint: disable=protected-access
                 self.original_sre_parse_uniq = sre_parse._uniq
                 sre_parse._uniq = lambda x: list(dict.fromkeys(x))
             except (ImportError, AttributeError):
@@ -30,6 +30,6 @@ class sre_performance_patch:
 
     def __exit__(self, type_, value, traceback):
         if self.sre_parse and self.original_sre_parse_uniq:
-            # pylint: disable=protected-access
+            #pylint: disable=protected-access
             self.sre_parse._uniq = self.original_sre_parse_uniq
             self.original_sre_parse_uniq = None

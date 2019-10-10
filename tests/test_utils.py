@@ -2,7 +2,7 @@ from laserembeddings.utils import sre_performance_patch
 
 
 def test_sre_performance_patch():
-    # pylint: disable=protected-access
+    #pylint: disable=protected-access
     try:
         import sre_parse
         uniq = sre_parse._uniq

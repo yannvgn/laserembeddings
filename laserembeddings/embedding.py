@@ -16,7 +16,7 @@ class BPESentenceEmbedding:
             or a binary-mode file object.
         max_sentences (int, optional): see ``.encoder.SentenceEncoder``.
         max_tokens (int, optional): see ``.encoder.SentenceEncoder``.
-        max_tokens (bool, optional): if True, mergesort sorting algorithm will be used,
+        stable (bool, optional): if True, mergesort sorting algorithm will be used,
             otherwise quicksort will be used. Defaults to False. See ``.encoder.SentenceEncoder``.
         cpu (bool, optional): if True, forces the use of the CPU even a GPU is available. Defaults to False.
     """
