@@ -116,9 +116,9 @@ class BPE:
                 f_bpe_codes.write(bpe_codes.read())
                 bpe_codes = f_bpe_codes.name
 
-            if isinstance(bpe_vocab, str):
+            if not isinstance(bpe_vocab, str):
                 f_bpe_vocab = tempfile.NamedTemporaryFile(mode='w', encoding='utf-8')
-                f_bpe_vocab.write(bpe_codes.read())
+                f_bpe_vocab.write(bpe_vocab.read())
                 bpe_vocab = f_bpe_vocab.name
 
             self.bpe = fastBPE.fastBPE(bpe_codes, bpe_vocab)
