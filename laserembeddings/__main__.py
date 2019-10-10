@@ -95,7 +95,7 @@ def main():
                 "❌  Looks like you're not running laserembeddings from its source code"
             )
             print(
-                "     → please checkout https://github.com/yannvgn/laserembedings.git"
+                "     → please checkout https://github.com/yannvgn/laserembeddings.git"
             )
             print(
                 '       then run "python -m laserembeddings download-test-data" from the root of the repository'
