@@ -20,7 +20,9 @@ jobs:
       before_install:
         - python3 -m pip install --upgrade pip
         - pip3 install poetry
-        - poetry config settings.virtualenvs.create false
+        - pip3 install virtualenv
+        - virtualenv .env
+        - source .env/bin/activate
         - pip3 install torch
     - name: "Python 3.7 on Windows"
       os: windows
