@@ -150,6 +150,11 @@ First, download the test data.
 python -m laserembeddings download-test-data
 ```
 
+Install extra dependencies (Chinese support):
+```
+poetry install -E zh
+```
+
 👉 If you want to know more about the contents and the generation of the test data, check out the [laserembeddings-test-data](https://github.com/yannvgn/laserembeddings-test-data) repository.
 
 Then, run the test with `SIMILARITY_TEST` env. variable set to `1`.
