@@ -58,19 +58,19 @@ class Laser:
             if not os.path.isfile(self.DEFAULT_BPE_CODES_FILE):
                 raise FileNotFoundError(
                     '93langs.fcodes is missing, run "python -m laserembeddings download-models" to fix that 🔧'
-                )
+                    .encode('utf8'))
             bpe_codes = self.DEFAULT_BPE_CODES_FILE
         if bpe_vocab is None:
             if not os.path.isfile(self.DEFAULT_BPE_VOCAB_FILE):
                 raise FileNotFoundError(
                     '93langs.fvocab is missing, run "python -m laserembeddings download-models" to fix that 🔧'
-                )
+                    .encode('utf8'))
             bpe_vocab = self.DEFAULT_BPE_VOCAB_FILE
         if encoder is None:
             if not os.path.isfile(self.DEFAULT_ENCODER_FILE):
                 raise FileNotFoundError(
                     'bilstm.93langs.2018-12-26.pt is missing, run "python -m laserembeddings download-models" to fix that 🔧'
-                )
+                    .encode('utf8'))
             encoder = self.DEFAULT_ENCODER_FILE
 
         self.tokenizer_options = tokenizer_options

@@ -22,18 +22,18 @@ def print_usage():
 
 
 def download_file(url, dest):
-    print(f'⏳   Downloading {url}...', end='')
+    print(f'⏳   Downloading {url}...'.encode('utf8'), end='')
     sys.stdout.flush()
     urllib.request.urlretrieve(url, dest)
     print(f'\r✅   Downloaded {url}    ')
 
 
 def extract_tar(tar, output_dir):
-    print(f'⏳   Extracting archive...', end='')
+    print(f'⏳   Extracting archive...'.encode('utf8'), end='')
     sys.stdout.flush()
     with tarfile.open(tar) as t:
         t.extractall(output_dir)
-    print(f'\r✅   Extracted archive    ')
+    print(f'\r✅   Extracted archive    '.encode('utf8'))
 
 
 def download_models(output_dir):
@@ -49,7 +49,7 @@ def download_models(output_dir):
         os.path.join(output_dir, 'bilstm.93langs.2018-12-26.pt'))
 
     print('')
-    print("✨ You\'re all set!")
+    print("✨ You\'re all set!".encode('utf8'))
 
 
 def download_and_extract_test_data(output_dir):
@@ -64,7 +64,7 @@ def download_and_extract_test_data(output_dir):
                 output_dir)
 
     print('')
-    print("✨ Ready to test all that!")
+    print("✨ Ready to test all that!".encode('utf8'))
 
 
 def main():
@@ -93,7 +93,7 @@ def main():
         if os.path.basename(repository_root) != 'laserembeddings':
             print(
                 "❌  Looks like you're not running laserembeddings from its source code"
-            )
+                .encode('utf8'))
             print(
                 "     → please checkout https://github.com/yannvgn/laserembedings.git"
             )
