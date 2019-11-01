@@ -35,8 +35,14 @@ pip install laserembeddings
 To install laserembeddings with extra dependencies:
 
 ```
+# if you need Chinese support:
+pip install laserembeddings[zh]
+
 # if you need Japanese support:
 pip install laserembeddings[ja]
+
+# or both:
+pip install laserembeddings[zh,ja]
 ```
 
 ### Downloading the pre-trained models
@@ -104,10 +110,6 @@ Here's a summary of the differences:
 | Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) | Moses is implemented in Perl |
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
 
-The following features have not been implemented yet:
-- romanize, needed to process Greek (el)
-- Chinese text segmentation, needed to process Chinese (zh, cmn, wuu and yue)
-
 ## Will I get the exact same embeddings?
 
 **For most languages, in most of the cases, yes.**
@@ -150,9 +152,9 @@ First, download the test data.
 python -m laserembeddings download-test-data
 ```
 
-Install extra dependencies (Japanese support):
+Install extra dependencies (Chinese and Japanese support):
 ```
-poetry install -E ja
+poetry install -E zh -E ja
 ```
 
 👉 If you want to know more about the contents and the generation of the test data, check out the [laserembeddings-test-data](https://github.com/yannvgn/laserembeddings-test-data) repository.

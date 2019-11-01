@@ -46,10 +46,6 @@ def test_similarity(test_data):
 
         for lang in test_data['langs']:
 
-            if lang in ('cmn', 'wuu', 'yue', 'zh', 'el'):
-                # language not supported, ignoring
-                continue
-
             sents = test_data[f'{lang}_sentences']
             orig_embeddings = test_data[f'{lang}_embeddings']
             embeddings = laser.embed_sentences(sents, lang)
