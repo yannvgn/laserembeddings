@@ -6,6 +6,12 @@ from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
 
 from .utils import BPECodesAdapter
 
+# Extras
+try:
+    import MeCab
+except ImportError:
+    MeCab = None
+
 __all__ = ['Tokenizer', 'BPE']
 
 ###############################################################################
@@ -43,17 +49,22 @@ class Tokenizer:
 
         if lang == 'zh':
             raise NotImplementedError('jieba is not yet implemented')
-        if lang == 'ja':
-            raise NotImplementedError('mecab is not yet implemented')
+        if lang == 'ja' and MeCab is None:
+            raise ModuleNotFoundError(
+                '''No module named 'MeCab'. Install laserembeddings with 'ja' extra to fix that: "pip install laserembeddings[ja]"'''
+            )
         if romanize:
             raise NotImplementedError('romanize is not yet implemented')
 
+        self.lang = lang
         self.lower_case = lower_case
         self.romanize = romanize
         self.descape = descape
 
         self.normalizer = MosesPunctNormalizer(lang=lang)
         self.tokenizer = MosesTokenizer(lang=lang)
+        self.mecab_tokenizer = MeCab.Tagger(
+            "-O wakati -b 50000") if MeCab is not None else None
 
     def tokenize(self, text: str) -> str:
         """Tokenizes a text and returns the tokens as a string"""
@@ -78,8 +89,11 @@ class Tokenizer:
                                        escape=False,
                                        aggressive_dash_splits=False)
 
-        # jieba
         # MECAB
+        if self.lang == 'ja':
+            text = self.mecab_tokenizer.parse(text).rstrip('\r\n')
+
+        # jieba
         # ROMAN_LC
         # not implemented
 
