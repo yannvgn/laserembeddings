@@ -3,37 +3,53 @@ import os
 import urllib.request
 import tarfile
 
+IS_WIN = os.name == 'nt'
+
+
+def non_win_string(s):
+    return s if not IS_WIN else ''
+
+
+CONSOLE_CLEAR = non_win_string('\033[0;0m')
+CONSOLE_BOLD = non_win_string('\033[0;1m')
+CONSOLE_WAIT = non_win_string('⏳')
+CONSOLE_DONE = non_win_string('✅')
+CONSOLE_STARS = non_win_string('✨')
+CONSOLE_ERROR = non_win_string('❌')
+
 
 def print_usage():
     print('Usage:')
     print('')
     print(
-        '\033[0;1mpython -m laserembeddings download-models [OUTPUT_DIRECTORY]\033[0;0m'
+        f'{CONSOLE_BOLD}python -m laserembeddings download-models [OUTPUT_DIRECTORY]{CONSOLE_CLEAR}'
     )
     print(
         '   Downloads LASER model files. If OUTPUT_DIRECTORY is omitted,'
         '\n'
-        '   the models will be placed into the \033[0;1mdata\033[0;0m directory of the module'
+        f'   the models will be placed into the {CONSOLE_BOLD}data{CONSOLE_CLEAR} directory of the module'
     )
     print('')
-    print('\033[0;1mpython -m laserembeddings download-test-data\033[0;0m')
+    print(
+        f'{CONSOLE_BOLD}python -m laserembeddings download-test-data{CONSOLE_CLEAR}'
+    )
     print('   downloads data needed to run the tests')
     print('')
 
 
 def download_file(url, dest):
-    print(f'⏳   Downloading {url}...'.encode('utf8'), end='')
+    print(f'{CONSOLE_WAIT}   Downloading {url}...', end='')
     sys.stdout.flush()
     urllib.request.urlretrieve(url, dest)
-    print(f'\r✅   Downloaded {url}    ')
+    print(f'\r{CONSOLE_DONE}   Downloaded {url}    ')
 
 
 def extract_tar(tar, output_dir):
-    print(f'⏳   Extracting archive...'.encode('utf8'), end='')
+    print(f'{CONSOLE_WAIT}   Extracting archive...', end='')
     sys.stdout.flush()
     with tarfile.open(tar) as t:
         t.extractall(output_dir)
-    print(f'\r✅   Extracted archive    '.encode('utf8'))
+    print(f'\r{CONSOLE_DONE}   Extracted archive    ')
 
 
 def download_models(output_dir):
@@ -49,7 +65,7 @@ def download_models(output_dir):
         os.path.join(output_dir, 'bilstm.93langs.2018-12-26.pt'))
 
     print('')
-    print("✨ You\'re all set!".encode('utf8'))
+    print(f'{CONSOLE_STARS} You\'re all set!')
 
 
 def download_and_extract_test_data(output_dir):
@@ -64,7 +80,7 @@ def download_and_extract_test_data(output_dir):
                 output_dir)
 
     print('')
-    print("✨ Ready to test all that!".encode('utf8'))
+    print(f'{CONSOLE_STARS} Ready to test all that!')
 
 
 def main():
@@ -92,8 +108,8 @@ def main():
 
         if os.path.basename(repository_root) != 'laserembeddings':
             print(
-                "❌  Looks like you're not running laserembeddings from its source code"
-                .encode('utf8'))
+                f"{CONSOLE_ERROR}  Looks like you're not running laserembeddings from its source code"
+            )
             print(
                 "     → please checkout https://github.com/yannvgn/laserembedings.git"
             )

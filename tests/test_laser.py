@@ -26,8 +26,8 @@ def test_similarity(test_data):
 
     if not test_data:
         raise FileNotFoundError(
-            'laserembeddings-test-data.npz is missing, run "python -m laserembeddings download-test-data" to fix that 🔧'
-            .encode('utf8'))
+            'laserembeddings-test-data.npz is missing, run "python -m laserembeddings download-test-data" to fix that'
+        )
 
     report = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                           'report', 'comparison-with-LASER.md')
