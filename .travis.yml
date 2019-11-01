@@ -29,13 +29,13 @@ jobs:
       language: shell
       before_install:
         - choco install python --version 3.7.0
-        - python3 -m pip install --upgrade pip
+        - pip3 install --upgrade pip
         - pip3 install poetry
         - pip3 install virtualenv
         - virtualenv env
         - env\Scripts\activate.bat
         - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
     - name: "Python 3.7 on Xenial Linux (wheel installation)"
       python: 3.7
       before_install:
