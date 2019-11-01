@@ -7,6 +7,13 @@ from transliterate import translit
 
 from .utils import BPECodesAdapter
 
+# Extras
+try:
+    import jieba
+    jieba.setLogLevel(60)
+except ImportError:
+    jieba = None
+
 __all__ = ['Tokenizer', 'BPE']
 
 ###############################################################################
@@ -42,8 +49,10 @@ class Tokenizer:
         if lang == 'jpn':
             lang = 'ja'
 
-        if lang == 'zh':
-            raise NotImplementedError('jieba is not yet implemented')
+        if lang == 'zh' and jieba is None:
+            raise ModuleNotFoundError(
+                '''No module named 'jieba'. Install laserembeddings with 'zh' extra to fix that: "pip install laserembeddings[zh]"'''
+            )
         if lang == 'ja':
             raise NotImplementedError('mecab is not yet implemented')
 
@@ -76,6 +85,9 @@ class Tokenizer:
                                        aggressive_dash_splits=False)
 
         # jieba
+        if self.lang == 'zh':
+            text = ' '.join(jieba.cut(text.rstrip('\r\n')))
+
         # MECAB
         # not implemented
 

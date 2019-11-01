@@ -32,6 +32,13 @@ You'll need Python 3.6 or higher.
 pip install laserembeddings
 ```
 
+To install laserembeddings with extra dependencies:
+
+```
+# if you need Chinese support:
+pip install laserembeddings[zh]
+```
+
 ### Downloading the pre-trained models
 
 ```
@@ -98,7 +105,6 @@ Here's a summary of the differences:
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
 
 The following features have not been implemented yet:
-- Chinese text segmentation, needed to process Chinese (zh, cmn, wuu and yue)
 - Japanese text segmentation, needed to process Japanese (ja, jpn)
 
 ## Will I get the exact same embeddings?
@@ -141,6 +147,11 @@ First, download the test data.
 
 ```
 python -m laserembeddings download-test-data
+```
+
+Install extra dependencies (Chinese support):
+```
+poetry install -E zh
 ```
 
 👉 If you want to know more about the contents and the generation of the test data, check out the [laserembeddings-test-data](https://github.com/yannvgn/laserembeddings-test-data) repository.
