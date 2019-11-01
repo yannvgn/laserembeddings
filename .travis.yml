@@ -1,16 +1,57 @@
-dist: xenial
 language: python
-python:
-  - "3.6"
-  - "3.7"
-before_install:
-  - pip install poetry
+jobs:
+  include:
+    - name: "Python 3.7 on Xenial Linux"
+      python: 3.7
+      before_install:
+        - python -m pip install --upgrade pip
+        - pip3 install poetry
+        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+    - name: "Python 3.6 on Xenial Linux"
+      python: 3.6
+      before_install:
+        - python -m pip install --upgrade pip
+        - pip3 install poetry
+        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+    - name: "Python 3.7 on macOS"
+      os: osx
+      osx_image: xcode11.2
+      language: shell
+      before_install:
+        - python3 -m pip install --upgrade pip
+        - pip3 install poetry
+        - pip3 install virtualenv
+        - virtualenv .env
+        - source .env/bin/activate
+        - pip3 install torch
+    - name: "Python 3.7 on Windows"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.7.0
+        - python -m pip install --upgrade pip
+        - pip3 install poetry
+        - poetry config settings.virtualenvs.create false
+        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+    - name: "Python 3.7 on Xenial Linux (wheel installation)"
+      python: 3.7
+      before_install:
+        - python -m pip install --upgrade pip
+        - pip3 install poetry
+        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+      install:
+        - poetry build
+        - pip3 install dist/laserembeddings-*.whl
+        - python -m laserembeddings download-models
+      script:
+        - python -c 'from laserembeddings import Laser; laser = Laser(); laser.embed_sentences(["test"], lang="en")'
+
 install:
-  - if [[ `python --version` =~ 'Python 3.6' ]]; then pip install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp36-cp36m-linux_x86_64.whl; fi
-  - if [[ `python --version` =~ 'Python 3.7' ]]; then pip install https://download.pytorch.org/whl/cpu/torch-1.1.0-cp37-cp37m-linux_x86_64.whl; fi
   - poetry remove torch -n # fix: latest torch wheel (1.1.0.post2) not available for linux
   - poetry install -n
-  - python -m laserembeddings download-models
+  - python3 -m laserembeddings download-models || python -m laserembeddings download-models
+
 script:
   - poetry run pylint laserembeddings
   - poetry run pytest

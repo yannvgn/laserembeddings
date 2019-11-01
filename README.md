@@ -105,7 +105,6 @@ Here's a summary of the differences:
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
 
 The following features have not been implemented yet:
-- romanize, needed to process Greek (el)
 - Japanese text segmentation, needed to process Japanese (ja, jpn)
 
 ## Will I get the exact same embeddings?
