@@ -46,7 +46,7 @@ def test_similarity(test_data):
 
         for lang in test_data['langs']:
 
-            if lang in ('cmn', 'wuu', 'yue', 'zh', 'jpn', 'ja', 'el'):
+            if lang in ('cmn', 'wuu', 'yue', 'zh', 'jpn', 'ja'):
                 # language not supported, ignoring
                 continue
 
