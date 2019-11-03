@@ -14,6 +14,11 @@ try:
 except ImportError:
     jieba = None
 
+try:
+    import MeCab
+except ImportError:
+    MeCab = None
+
 __all__ = ['Tokenizer', 'BPE']
 
 ###############################################################################
@@ -53,8 +58,10 @@ class Tokenizer:
             raise ModuleNotFoundError(
                 '''No module named 'jieba'. Install laserembeddings with 'zh' extra to fix that: "pip install laserembeddings[zh]"'''
             )
-        if lang == 'ja':
-            raise NotImplementedError('mecab is not yet implemented')
+        if lang == 'ja' and MeCab is None:
+            raise ModuleNotFoundError(
+                '''No module named 'MeCab'. Install laserembeddings with 'ja' extra to fix that: "pip install laserembeddings[ja]"'''
+            )
 
         self.lang = lang
         self.lower_case = lower_case
@@ -63,6 +70,8 @@ class Tokenizer:
 
         self.normalizer = MosesPunctNormalizer(lang=lang)
         self.tokenizer = MosesTokenizer(lang=lang)
+        self.mecab_tokenizer = MeCab.Tagger(
+            "-O wakati -b 50000") if MeCab is not None else None
 
     def tokenize(self, text: str) -> str:
         """Tokenizes a text and returns the tokens as a string"""
@@ -89,7 +98,8 @@ class Tokenizer:
             text = ' '.join(jieba.cut(text.rstrip('\r\n')))
 
         # MECAB
-        # not implemented
+        if self.lang == 'ja':
+            text = self.mecab_tokenizer.parse(text).rstrip('\r\n')
 
         # ROMAN_LC
         if self.romanize:
