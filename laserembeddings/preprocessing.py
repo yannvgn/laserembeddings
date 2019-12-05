@@ -1,12 +1,12 @@
-import tempfile
 from typing import TextIO, Union
 
-import fastBPE
 from sacremoses import MosesPunctNormalizer, MosesTokenizer
 from sacremoses.util import xml_unescape
+from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
+
+from .utils import BPECodesAdapter
 
 __all__ = ['Tokenizer', 'BPE']
-
 
 ###############################################################################
 #
@@ -111,17 +111,18 @@ class BPE:
         f_bpe_vocab = None
 
         try:
-            if not isinstance(bpe_codes, str):
-                f_bpe_codes = tempfile.NamedTemporaryFile(mode='w', encoding='utf-8')
-                f_bpe_codes.write(bpe_codes.read())
-                bpe_codes = f_bpe_codes.name
+            if isinstance(bpe_codes, str):
+                f_bpe_codes = open(bpe_codes, 'r', encoding='utf-8')
+            if isinstance(bpe_vocab, str):
+                f_bpe_vocab = open(bpe_vocab, 'r', encoding='utf-8')
 
-            if not isinstance(bpe_vocab, str):
-                f_bpe_vocab = tempfile.NamedTemporaryFile(mode='w', encoding='utf-8')
-                f_bpe_vocab.write(bpe_vocab.read())
-                bpe_vocab = f_bpe_vocab.name
+            self.bpe = subword_nmt_bpe(codes=BPECodesAdapter(f_bpe_codes
+                                                             or bpe_codes),
+                                       vocab=read_vocabulary(f_bpe_vocab
+                                                             or bpe_vocab,
+                                                             threshold=None))
+            self.bpe.version = (0, 2)
 
-            self.bpe = fastBPE.fastBPE(bpe_codes, bpe_vocab)
         finally:
             if f_bpe_codes:
                 f_bpe_codes.close()
@@ -130,4 +131,4 @@ class BPE:
 
     def encode_tokens(self, sentence_tokens: str) -> str:
         """Returns the BPE-encoded sentence from a tokenized sentence"""
-        return self.bpe.apply([sentence_tokens])[0]
+        return self.bpe.process_line(sentence_tokens)
