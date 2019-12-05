@@ -132,14 +132,14 @@ A big thanks to the creators of [Sacremoses](https://github.com/alvations/sacrem
 
 ## Testing
 
-First you'll need to checkout this repository and install it (in a virtual environment if you want). Also make sure to have [Poetry](https://github.com/sdispater/poetry) installed.
+The first thing you'll need is [Poetry](https://github.com/sdispater/poetry). Please refer to the [installation guidelines](https://poetry.eustace.io/docs/#installation).
 
+Clone this repository and install the project:
 ```
-peotry install
+poetry install
 ```
 
-Then, to run the tests:
-
+To run the tests:
 ```
 poetry run pytest
 ```
