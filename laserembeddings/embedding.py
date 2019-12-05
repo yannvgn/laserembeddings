@@ -12,11 +12,11 @@ class BPESentenceEmbedding:
     LASER embeddings computation from BPE-encoded sentences.
 
     Args:
-        encoder (str or BinaryIO): the path to LASER's encoder PyToch model,
+        encoder (str or BinaryIO): the path to LASER's encoder PyTorch model,
             or a binary-mode file object.
         max_sentences (int, optional): see ``.encoder.SentenceEncoder``.
         max_tokens (int, optional): see ``.encoder.SentenceEncoder``.
-        mastablex_tokens (bool, optional): if True, mergesort sorting algorithm will be used,
+        stable (bool, optional): if True, mergesort sorting algorithm will be used,
             otherwise quicksort will be used. Defaults to False. See ``.encoder.SentenceEncoder``.
         cpu (bool, optional): if True, forces the use of the CPU even a GPU is available. Defaults to False.
     """
@@ -40,7 +40,7 @@ class BPESentenceEmbedding:
         Computes the LASER embeddings of BPE-encoded sentences
 
         Args:
-            sentences (List[str]): The list of BPE-encoded sentences
+            bpe_sentences (List[str]): The list of BPE-encoded sentences
 
         Returns:
             np.ndarray: A N * 1024 NumPy array containing the embeddings, N being the number of sentences provided.
