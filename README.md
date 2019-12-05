@@ -95,7 +95,7 @@ Here's a summary of the differences:
 | Part of the pipeline | LASER dependency (original project) | laserembeddings dependency (this package) | Reason |
 |----------------------|-------------------------------------|----------------------------------------|--------|
 | Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) | Moses is implemented in Perl |
-
+| BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
 
 The following features have not been implemented yet:
 - romanize, needed to process Greek (el)
@@ -124,20 +124,14 @@ A big thanks to the creators of [Sacremoses](https://github.com/alvations/sacrem
 
 ## Testing
 
-First you'll need to checkout this repository and install it (in a virtual environment if you want).
- 
-Install [Poetry](https://github.com/sdispater/poetry)
-```
-pip install poetry
-```
+The first thing you'll need is [Poetry](https://github.com/sdispater/poetry). Please refer to the [installation guidelines](https://poetry.eustace.io/docs/#installation).
 
-Once Poetry is installed, run
+Clone this repository and install the project:
 ```
 poetry install
 ```
 
-Then, to run the tests:
-
+To run the tests:
 ```
 poetry run pytest
 ```
