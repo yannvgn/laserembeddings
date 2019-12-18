@@ -20,6 +20,8 @@ def test_laser():
             lang='en').shape == (2, 1024)
         assert laser.embed_sentences(['hello world!', "j'aime les pâtes"],
                                      lang=['en', 'fr']).shape == (2, 1024)
+        assert laser.embed_sentences('hello world!',
+                                     lang='en').shape == (1, 1024)
 
 
 def test_similarity(test_data):
