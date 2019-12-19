@@ -7,8 +7,11 @@
 
 laserembeddings is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
-🎁 **Version 0.1.3 is out. What's new?**
-- A lot of languages that were only partially supported are now fully supported (br, bs, ceb, fr, gl, oc, ug, vi) 🌍
+✨ **Version 1.0.0 is here! What's new?**
+- Greek, Chinese and Japanese are now supported 🇬🇷 🇨🇳 🇯🇵 
+- Some languages that were only partially supported are now fully supported (New Norwegian, Swedish, Tatar) 🌍
+- It should work on Windows now 🙄
+- Sentences in different languages can now be processed in the same batch ⚡️
 
 ## Context
 
@@ -70,7 +73,7 @@ embeddings = laser.embed_sentences(
 # embeddings is a N*1024 (N = number of sentences) NumPy array
 ```
 
-If the sentences are not in the same language, you can pass a list of languages
+If the sentences are not in the same language, you can pass a list of language codes:
 ```python
 embeddings = laser.embed_sentences(
     ['I love pasta.',
