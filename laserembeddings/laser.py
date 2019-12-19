@@ -88,21 +88,25 @@ class Laser:
 
         return self.tokenizers[lang]
 
-    def embed_sentences(self, sentences: List[str], lang: str) -> np.ndarray:
+    def embed_sentences(self, sentences: Union[List[str], str],
+                        lang: Union[str, List[str]]) -> np.ndarray:
         """
         Computes the LASER embeddings of provided sentences using the tokenizer for the specified language.
 
         Args:
             sentences (List[str]): the sentences to compute the embeddings from.
-            lang (str): the language code (ISO 639-1) used to tokenize the sentences.
+            lang (str or List[str]): the language code(s) (ISO 639-1) used to tokenize the sentences
+                (either as a string - same code for every sentence - or as a list of strings - one code per sentence).
 
         Returns:
             np.ndarray: A N * 1024 NumPy array containing the embeddings, N being the number of sentences provided.
         """
+        sentences = [sentences] if isinstance(sentences, str) else sentences
+        lang = [lang] * len(sentences) if isinstance(lang, str) else lang
         with sre_performance_patch():  # see https://bugs.python.org/issue37723
             sentence_tokens = [
-                self._get_tokenizer(lang).tokenize(sentence)
-                for sentence in sentences
+                self._get_tokenizer(sentence_lang).tokenize(sentence)
+                for sentence, sentence_lang in zip(sentences, lang)
             ]
             bpe_encoded = [
                 self.bpe.encode_tokens(tokens) for tokens in sentence_tokens
