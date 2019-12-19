@@ -109,6 +109,7 @@ Here's a summary of the differences:
 |----------------------|-------------------------------------|----------------------------------------|--------|
 | Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) | Moses is implemented in Perl |
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
+| Japanese segmentation (optional) | [MeCab](https://github.com/taku910/mecab) / [JapaneseTokenizer](https://github.com/Kensuke-Mitsuzawa/JapaneseTokenizers) | [mecab-python3](https://github.com/SamuraiT/mecab-python3) | mecab-python3 comes with wheels for major platforms (no compilation needed) |
 
 ## Will I get the exact same embeddings?
 
