@@ -106,7 +106,7 @@ def main():
         repository_root = os.path.dirname(
             os.path.dirname(os.path.realpath(__file__)))
 
-        if os.path.basename(repository_root) != 'laserembeddings':
+        if not os.path.isfile(os.path.join(repository_root, 'pyproject.toml')):
             print(
                 f"{CONSOLE_ERROR}  Looks like you're not running laserembeddings from its source code"
             )
