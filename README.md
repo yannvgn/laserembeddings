@@ -60,12 +60,23 @@ from laserembeddings import Laser
 
 laser = Laser()
 
+# if all sentences are in the same language:
+
 embeddings = laser.embed_sentences(
     ['let your neural network be polyglot',
      'use multilingual embeddings!'],
-    lang='en')  # lang is used for tokenization
+    lang='en')  # lang is only used for tokenization
 
 # embeddings is a N*1024 (N = number of sentences) NumPy array
+```
+
+If the sentences are not in the same language, you can pass a list of languages
+```python
+embeddings = laser.embed_sentences(
+    ['I love pasta.',
+     "J'adore les pâtes.",
+     'Ich liebe Pasta.'],
+    lang=['en', 'fr', 'de'])
 ```
 
 If you downloaded the models into a specific directory:
