@@ -1,10 +1,23 @@
-from typing import TextIO, Union
+from typing import TextIO, Union, Optional
 
 from sacremoses import MosesPunctNormalizer, MosesTokenizer
 from sacremoses.util import xml_unescape
 from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
+from transliterate import translit
 
 from .utils import BPECodesAdapter
+
+# Extras
+try:
+    import jieba
+    jieba.setLogLevel(60)
+except ImportError:
+    jieba = None
+
+try:
+    import MeCab
+except ImportError:
+    MeCab = None
 
 __all__ = ['Tokenizer', 'BPE']
 
@@ -23,8 +36,8 @@ class Tokenizer:
         lang (str): the language code (ISO 639-1) of the texts to tokenize
         lower_case (bool, optional): if True, the texts are lower-cased before being tokenized.
             Defaults to True.
-        romanize (bool, optional): if True, the texts are romanized before being tokenized.
-            Defaults to False. Should be True for "el" language.
+        romanize (bool or None, optional): if True, the texts are romanized.
+            Defaults to None (romanization enabled based on input language).
         descape (bool, optional): if True, the XML-escaped symbols get de-escaped.
             Default to False.
     """
@@ -32,7 +45,7 @@ class Tokenizer:
     def __init__(self,
                  lang: str = 'en',
                  lower_case: bool = True,
-                 romanize: bool = False,
+                 romanize: Optional[bool] = None,
                  descape: bool = False):
         assert lower_case, 'lower case is needed by all the models'
 
@@ -41,24 +54,27 @@ class Tokenizer:
         if lang == 'jpn':
             lang = 'ja'
 
-        if lang == 'zh':
-            raise NotImplementedError('jieba is not yet implemented')
-        if lang == 'ja':
-            raise NotImplementedError('mecab is not yet implemented')
-        if romanize:
-            raise NotImplementedError('romanize is not yet implemented')
+        if lang == 'zh' and jieba is None:
+            raise ModuleNotFoundError(
+                '''No module named 'jieba'. Install laserembeddings with 'zh' extra to fix that: "pip install laserembeddings[zh]"'''
+            )
+        if lang == 'ja' and MeCab is None:
+            raise ModuleNotFoundError(
+                '''No module named 'MeCab'. Install laserembeddings with 'ja' extra to fix that: "pip install laserembeddings[ja]"'''
+            )
 
+        self.lang = lang
         self.lower_case = lower_case
-        self.romanize = romanize
+        self.romanize = romanize if romanize is not None else lang == 'el'
         self.descape = descape
 
         self.normalizer = MosesPunctNormalizer(lang=lang)
         self.tokenizer = MosesTokenizer(lang=lang)
+        self.mecab_tokenizer = MeCab.Tagger(
+            "-O wakati -b 50000") if MeCab is not None else None
 
     def tokenize(self, text: str) -> str:
         """Tokenizes a text and returns the tokens as a string"""
-        if self.lower_case:
-            text = text.lower()
 
         # REM_NON_PRINT_CHAR
         # not implemented
@@ -71,7 +87,6 @@ class Tokenizer:
             text = xml_unescape(text)
 
         # MOSES_TOKENIZER
-
         # see: https://github.com/facebookresearch/LASER/issues/55#issuecomment-480881573
         text = self.tokenizer.tokenize(text,
                                        return_str=True,
@@ -79,9 +94,19 @@ class Tokenizer:
                                        aggressive_dash_splits=False)
 
         # jieba
+        if self.lang == 'zh':
+            text = ' '.join(jieba.cut(text.rstrip('\r\n')))
+
         # MECAB
+        if self.lang == 'ja':
+            text = self.mecab_tokenizer.parse(text).rstrip('\r\n')
+
         # ROMAN_LC
-        # not implemented
+        if self.romanize:
+            text = translit(text, self.lang, reversed=True)
+
+        if self.lower_case:
+            text = text.lower()
 
         return text
 

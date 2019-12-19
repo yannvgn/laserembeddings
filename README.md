@@ -32,6 +32,19 @@ You'll need Python 3.6 or higher.
 pip install laserembeddings
 ```
 
+To install laserembeddings with extra dependencies:
+
+```
+# if you need Chinese support:
+pip install laserembeddings[zh]
+
+# if you need Japanese support:
+pip install laserembeddings[ja]
+
+# or both:
+pip install laserembeddings[zh,ja]
+```
+
 ### Downloading the pre-trained models
 
 ```
@@ -47,12 +60,23 @@ from laserembeddings import Laser
 
 laser = Laser()
 
+# if all sentences are in the same language:
+
 embeddings = laser.embed_sentences(
     ['let your neural network be polyglot',
      'use multilingual embeddings!'],
-    lang='en')  # lang is used for tokenization
+    lang='en')  # lang is only used for tokenization
 
 # embeddings is a N*1024 (N = number of sentences) NumPy array
+```
+
+If the sentences are not in the same language, you can pass a list of languages
+```python
+embeddings = laser.embed_sentences(
+    ['I love pasta.',
+     "J'adore les pâtes.",
+     'Ich liebe Pasta.'],
+    lang=['en', 'fr', 'de'])
 ```
 
 If you downloaded the models into a specific directory:
@@ -96,11 +120,7 @@ Here's a summary of the differences:
 |----------------------|-------------------------------------|----------------------------------------|--------|
 | Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) | Moses is implemented in Perl |
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
-
-The following features have not been implemented yet:
-- romanize, needed to process Greek (el)
-- Chinese text segmentation, needed to process Chinese (zh, cmn, wuu and yue)
-- Japanese text segmentation, needed to process Japanese (ja, jpn)
+| Japanese segmentation (optional) | [MeCab](https://github.com/taku910/mecab) / [JapaneseTokenizer](https://github.com/Kensuke-Mitsuzawa/JapaneseTokenizers) | [mecab-python3](https://github.com/SamuraiT/mecab-python3) | mecab-python3 comes with wheels for major platforms (no compilation needed) |
 
 ## Will I get the exact same embeddings?
 
@@ -142,6 +162,11 @@ First, download the test data.
 
 ```
 python -m laserembeddings download-test-data
+```
+
+Install extra dependencies (Chinese and Japanese support):
+```
+poetry install -E zh -E ja
 ```
 
 👉 If you want to know more about the contents and the generation of the test data, check out the [laserembeddings-test-data](https://github.com/yannvgn/laserembeddings-test-data) repository.

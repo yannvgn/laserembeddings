@@ -73,7 +73,7 @@ def download_and_extract_test_data(output_dir):
     print('')
 
     download_file(
-        'https://github.com/yannvgn/laserembeddings-test-data/releases/download/v1.0.0/laserembeddings-test-data.tar.gz',
+        'https://github.com/yannvgn/laserembeddings-test-data/releases/download/v1.0.1/laserembeddings-test-data.tar.gz',
         os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'))
 
     extract_tar(os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'),
@@ -106,7 +106,7 @@ def main():
         repository_root = os.path.dirname(
             os.path.dirname(os.path.realpath(__file__)))
 
-        if os.path.basename(repository_root) != 'laserembeddings':
+        if not os.path.isfile(os.path.join(repository_root, 'pyproject.toml')):
             print(
                 f"{CONSOLE_ERROR}  Looks like you're not running laserembeddings from its source code"
             )

@@ -18,6 +18,10 @@ def test_laser():
         assert laser.embed_sentences(
             ['hello world!', 'i hope the tests are passing'],
             lang='en').shape == (2, 1024)
+        assert laser.embed_sentences(['hello world!', "j'aime les pâtes"],
+                                     lang=['en', 'fr']).shape == (2, 1024)
+        assert laser.embed_sentences('hello world!',
+                                     lang='en').shape == (1, 1024)
 
 
 def test_similarity(test_data):
@@ -45,10 +49,6 @@ def test_similarity(test_data):
             '|-|--------|----------------------|----------------------|\n')
 
         for lang in test_data['langs']:
-
-            if lang in ('cmn', 'wuu', 'yue', 'zh', 'jpn', 'ja', 'el'):
-                # language not supported, ignoring
-                continue
 
             sents = test_data[f'{lang}_sentences']
             orig_embeddings = test_data[f'{lang}_embeddings']
