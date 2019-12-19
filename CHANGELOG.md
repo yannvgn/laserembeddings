@@ -1,3 +1,11 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/yannvgn/laserembeddings/compare/v0.1.3...v1.0.0) (2019-12-19)
+
+- Greek, Chinese and Japanese are now supported 🇬🇷 🇨🇳 🇯🇵 
+- Some languages that were only partially supported are now fully supported (New Norwegian, Swedish, Tatar) 🌍
+- It should work on Windows now 🙄
+- Sentences in different languages can now be processed in the same batch ⚡️
+
 <a name="0.1.3"></a>
 # [0.1.3](https://github.com/yannvgn/laserembeddings/compare/v0.1.2...v0.1.3) (2019-10-03)
 
