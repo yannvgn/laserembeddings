@@ -73,7 +73,7 @@ def download_and_extract_test_data(output_dir):
     print('')
 
     download_file(
-        'https://github.com/yannvgn/laserembeddings-test-data/releases/download/v1.0.1/laserembeddings-test-data.tar.gz',
+        'https://github.com/yannvgn/laserembeddings-test-data/releases/download/v1.0.2/laserembeddings-test-data.tar.gz',
         os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'))
 
     extract_tar(os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'),
