@@ -15,8 +15,8 @@ subword-nmt = "^0.3.6"
 numpy = "^1.15.4"
 sacremoses = "0.0.35"
 transliterate = "1.10.2"
-mecab-python3 = { version = "^0.996.2", optional = true }
-jieba = { version = "0.39", optional = true }
+mecab-python3 = { version = "^0.996.3", markers = "sys_platform != 'win32'", optional = true }
+jieba = { version = "^0.42.1", optional = true }
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"

@@ -71,7 +71,7 @@ class Tokenizer:
         self.normalizer = MosesPunctNormalizer(lang=lang)
         self.tokenizer = MosesTokenizer(lang=lang)
         self.mecab_tokenizer = MeCab.Tagger(
-            "-O wakati -b 50000") if MeCab is not None else None
+            "-O wakati -b 50000") if lang == 'ja' else None
 
     def tokenize(self, text: str) -> str:
         """Tokenizes a text and returns the tokens as a string"""
