@@ -1,5 +1,7 @@
 # The code contained in this file was copied/pasted from LASER's source code (source/embed.py)
-# and nearly kept untouched (besides code formatting)
+# and nearly kept untouched besides:
+# - code formatting
+# - buffered_arange: fix to avoid unnecessary warning on PyTorch >= 1.4.0
 
 #pylint: disable=redefined-builtin, consider-using-enumerate, arguments-differ, fixme
 
@@ -18,9 +20,9 @@ Batch = namedtuple('Batch', 'srcs tokens lengths')
 
 
 def buffered_arange(max):
-    if not hasattr(buffered_arange, 'buf'):
+    if not hasattr(buffered_arange,
+                   'buf') or max > buffered_arange.buf.numel():
         buffered_arange.buf = torch.LongTensor()
-    if max > buffered_arange.buf.numel():
         torch.arange(max, out=buffered_arange.buf)
     return buffered_arange.buf[:max]
 
