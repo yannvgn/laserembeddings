@@ -5,13 +5,15 @@
 [![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square)](https://pypi.org/project/laserembeddings/)
 [![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)](https://github.com/yannvgn/laserembeddings/blob/master/LICENSE)
 
-laserembeddings is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
+**Out-of-the-box multilingual sentence embeddings.**
 
-✨ **Version 1.0.0 is here! What's new?**
-- Greek, Chinese and Japanese are now supported 🇬🇷 🇨🇳 🇯🇵 
-- Some languages that were only partially supported are now fully supported (New Norwegian, Swedish, Tatar) 🌍
-- It should work on Windows now 🙄
-- Sentences in different languages can now be processed in the same batch ⚡️
+![Projection of LASER embeddings: similar sentences have similar embeddings](laserembeddings.gif)
+
+_laserembeddings_ is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
+
+✨ **Version 1.0.1 is here! What's new?**
+- The encoder was fixed to remove an innocuous warning message that would sometimes appear when using PyTorch 1.4 🐛
+- Japanese extra is now disabled on Windows (sorry) to prevent installation issues and computation failures in other languages 😕
 
 ## Context
 
@@ -41,7 +43,7 @@ To install laserembeddings with extra dependencies:
 # if you need Chinese support:
 pip install laserembeddings[zh]
 
-# if you need Japanese support:
+# if you need Japanese support (not available on Windows):
 pip install laserembeddings[ja]
 
 # or both:
@@ -161,15 +163,14 @@ poetry run pytest
 
 ### Testing the similarity between the embeddings computed with LASER and laserembeddings
 
-First, download the test data.
-
-```
-python -m laserembeddings download-test-data
-```
-
-Install extra dependencies (Chinese and Japanese support):
+First, install the project with the extra dependencies (Chinese and Japanese support):
 ```
 poetry install -E zh -E ja
+```
+
+Then, download the test data:
+```
+poetry run python -m laserembeddings download-test-data
 ```
 
 👉 If you want to know more about the contents and the generation of the test data, check out the [laserembeddings-test-data](https://github.com/yannvgn/laserembeddings-test-data) repository.

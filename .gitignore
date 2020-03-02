@@ -3,6 +3,9 @@ laserembeddings/data/**
 tests/data/**
 !tests/data/.gitkeep
 
+poetry.lock
+poetry.toml
+
 .DS_Store
 .vscode
 

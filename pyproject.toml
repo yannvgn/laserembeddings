@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "laserembeddings"
-version = "1.0.0"
+version = "1.0.1"
 description = "Production-ready LASER multilingual embeddings"
 authors = ["yannvgn <hi@yannvgn.io>"]
 license = "BSD-3-Clause"
