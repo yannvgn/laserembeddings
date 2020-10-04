@@ -6,6 +6,8 @@ import numpy as np
 from laserembeddings import Laser
 
 SIMILARITY_TEST = os.getenv('SIMILARITY_TEST')
+SKIP_ZH = os.getenv('SKIP_ZH')
+SKIP_JA = os.getenv('SKIP_JA')
 
 
 def test_laser():
@@ -22,6 +24,20 @@ def test_laser():
                                      lang=['en', 'fr']).shape == (2, 1024)
         assert laser.embed_sentences('hello world!',
                                      lang='en').shape == (1, 1024)
+
+
+def test_zh():
+    if SKIP_ZH:
+        pytest.skip("SKIP_ZH is set")
+    laser = Laser()
+    assert laser.embed_sentences(['干杯！'], lang='zh').shape == (1, 1024)
+
+
+def test_ja():
+    if SKIP_JA:
+        pytest.skip("SKIP_JA is set")
+    laser = Laser()
+    assert laser.embed_sentences(['乾杯！'], lang='ja').shape == (1, 1024)
 
 
 def test_similarity(test_data):

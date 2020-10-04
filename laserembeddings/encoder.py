@@ -3,7 +3,7 @@
 # - code formatting
 # - buffered_arange: fix to avoid unnecessary warning on PyTorch >= 1.4.0
 
-#pylint: disable=redefined-builtin, consider-using-enumerate, arguments-differ, fixme
+# pylint: disable=redefined-builtin, consider-using-enumerate, arguments-differ, fixme, abstract-method
 
 from collections import namedtuple
 

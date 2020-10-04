@@ -1,25 +1,25 @@
 language: python
 jobs:
   include:
-    - name: "Python 3.7 on Xenial Linux"
-      python: 3.7
+    - name: "Python 3.8 on Xenial Linux"
+      python: 3.8
       before_install:
         - python -m pip install --upgrade pip
-        - pip3 install poetry==1.0.*
-        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+        - pip3 install poetry==1.1.*
+        - pip3 install torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
     - name: "Python 3.6 on Xenial Linux"
       python: 3.6
       before_install:
         - python -m pip install --upgrade pip
-        - pip3 install poetry==1.0.*
-        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+        - pip3 install poetry==1.1.*
+        - pip3 install torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
     - name: "Python 3.7 on macOS"
       os: osx
       osx_image: xcode11.2
       language: shell
       before_install:
         - python3 -m pip install --upgrade pip
-        - pip3 install poetry==1.0.*
+        - pip3 install poetry==1.1.*
         - pip3 install virtualenv
         - virtualenv .env
         - source .env/bin/activate
@@ -30,16 +30,16 @@ jobs:
       before_install:
         - choco install python --version 3.7.0
         - python -m pip install --upgrade pip
-        - pip3 install poetry==1.0.*
+        - pip3 install poetry==1.1.*
         - poetry config virtualenvs.create false
-        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+        - pip3 install torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-    - name: "Python 3.7 on Xenial Linux (wheel installation)"
-      python: 3.7
+    - name: "Python 3.8 on Xenial Linux (wheel installation)"
+      python: 3.8
       before_install:
         - python -m pip install --upgrade pip
-        - pip3 install poetry==1.0.*
-        - pip3 install torch==1.3.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+        - pip3 install poetry==1.1.*
+        - pip3 install torch==1.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
       install:
         - poetry build
         - pip3 install dist/laserembeddings-*.whl
@@ -48,8 +48,8 @@ jobs:
         - python -c 'from laserembeddings import Laser; laser = Laser(); laser.embed_sentences(["test"], lang="en")'
 
 install:
-  - poetry remove torch -n # fix: latest torch wheel (1.1.0.post2) not available for linux
-  - poetry install -n
+  - poetry remove torch # fix: latest torch wheel (1.1.0.post2) not available for linux
+  - poetry install -E zh -E ja
   - python3 -m laserembeddings download-models || python -m laserembeddings download-models
 
 script:
