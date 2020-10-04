@@ -7,7 +7,7 @@
 
 **Out-of-the-box multilingual sentence embeddings.**
 
-![Projection of LASER embeddings: similar sentences have similar embeddings](laserembeddings.gif)
+![LASER embeddings maps similar sentences in any language to similar language-agnostic embeddings](laserembeddings.gif)
 
 _laserembeddings_ is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
@@ -29,7 +29,9 @@ That is great, especially if you don't have training sets for the language(s) yo
 
 ## Getting started
 
-You'll need Python 3.6 or higher.
+### Prerequisites
+
+You'll need Python 3.6+ and PyTorch. Please refer to [PyTorch installation instructions](https://pytorch.org/get-started/locally/).
 
 ### Installation
 
@@ -37,18 +39,24 @@ You'll need Python 3.6 or higher.
 pip install laserembeddings
 ```
 
-To install laserembeddings with extra dependencies:
+#### Chinese language
+
+Chinese is not supported by default. If you need to embed Chinese sentences, please install laserembeddings with the "zh" extra. This extra includes [jieba](https://github.com/fxsjy/jieba).
 
 ```
-# if you need Chinese support:
 pip install laserembeddings[zh]
-
-# if you need Japanese support (not available on Windows):
-pip install laserembeddings[ja]
-
-# or both:
-pip install laserembeddings[zh,ja]
 ```
+
+#### Japanese language
+
+Japanese is not supported by default. If you need to embed Japanese sentences, please install laserembeddings with the "ja" extra. This extra includes [mecab-python3](https://github.com/SamuraiT/mecab-python3) and the [ipadic](https://github.com/polm/ipadic-py) dictionary, which is used in the original LASER project.
+
+If you have issues running laserembeddings on Japanese sentences, please refer to [mecab-python3 documentation](https://github.com/SamuraiT/mecab-python3) for troubleshooting.
+
+```
+pip install laserembeddings[ja]
+```
+
 
 ### Downloading the pre-trained models
 
@@ -123,9 +131,9 @@ Here's a summary of the differences:
 
 | Part of the pipeline | LASER dependency (original project) | laserembeddings dependency (this package) | Reason |
 |----------------------|-------------------------------------|----------------------------------------|--------|
-| Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) | Moses is implemented in Perl |
+| Normalization / tokenization | [Moses](https://github.com/moses-smt/mosesdecoder) | [Sacremoses](https://github.com/alvations/sacremoses) 0.0.35, which seems to be the closest version to the Moses version used to train the model | Moses is implemented in Perl |
 | BPE encoding | [fastBPE](https://github.com/glample/fastBPE) | [subword-nmt](https://github.com/rsennrich/subword-nmt) | fastBPE cannot be installed via pip and requires compiling C++ code |
-| Japanese segmentation (optional) | [MeCab](https://github.com/taku910/mecab) / [JapaneseTokenizer](https://github.com/Kensuke-Mitsuzawa/JapaneseTokenizers) | [mecab-python3](https://github.com/SamuraiT/mecab-python3) | mecab-python3 comes with wheels for major platforms (no compilation needed) |
+| Japanese segmentation (optional) | [MeCab](https://github.com/taku910/mecab) / [JapaneseTokenizer](https://github.com/Kensuke-Mitsuzawa/JapaneseTokenizers) | [mecab-python3](https://github.com/SamuraiT/mecab-python3) and [ipadic](https://github.com/polm/ipadic-py) dictionary | mecab-python3 comes with wheels for major platforms (no compilation needed) |
 
 ## Will I get the exact same embeddings?
 
@@ -153,7 +161,7 @@ The first thing you'll need is [Poetry](https://github.com/sdispater/poetry). Pl
 
 Clone this repository and install the project:
 ```
-poetry install
+poetry install -E zh -E ja
 ```
 
 To run the tests:
