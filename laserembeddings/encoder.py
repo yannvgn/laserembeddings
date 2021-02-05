@@ -193,7 +193,7 @@ class Encoder(nn.Module):
 
         # pack embedded source tokens into a PackedSequence
         packed_x = nn.utils.rnn.pack_padded_sequence(x,
-                                                     src_lengths.data.tolist())
+                                                     src_lengths.data.cpu())
 
         # apply LSTM
         if self.bidirectional:
