@@ -11,8 +11,8 @@
 
 _laserembeddings_ is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
-✨ **Version 1.1.0 is here! What's new?**
-- Japanese extra on Windows is back! 🇯🇵
+✨ **Version 1.1.1 is here! What's new?**
+- An issue with PyTorch 1.7.0 was fixed (#32) 🐛 Thank you, [@niklaskorz](https://github.com/niklaskorz)
 
 ## Context
 

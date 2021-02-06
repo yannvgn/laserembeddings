@@ -1,3 +1,8 @@
+<a name="1.1.1"></a>
+# [1.1.1](https://github.com/yannvgn/laserembeddings/compare/v1.1.0...v1.1.1) (2021-02-06)
+
+- An issue with PyTorch 1.7.0 was fixed (#32) 🐛
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/yannvgn/laserembeddings/compare/v1.0.1...v1.1.0) (2020-10-04)
 
