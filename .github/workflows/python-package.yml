@@ -50,11 +50,11 @@ jobs:
         installer-parallel: true
     - name: Install laserembeddings
       run: |
-        python -m poetry install -E zh -E ja
-        python -m poetry run python -m laserembeddings download-models
+        poetry install -E zh -E ja
+        poetry run python -m laserembeddings download-models
     - name: Lint
       run: |
-        python -m poetry run pylint laserembeddings
+        poetry run pylint laserembeddings
     - name: Test with pytest
       run: |
-        python -m poetry run pytest
+        poetry run pytest
