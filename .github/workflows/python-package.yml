@@ -49,7 +49,7 @@ jobs:
     - name: Install laserembeddings
       run: |
         python -m poetry install -E zh -E ja
-        python -m laserembeddings download-models
+        python -m poetry run python -m laserembeddings download-models
     - name: Lint
       run: |
         python -m poetry run pylint laserembeddings
