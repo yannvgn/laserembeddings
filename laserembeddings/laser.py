@@ -1,4 +1,5 @@
-from typing import Dict, Any, Union, List, TextIO, BinaryIO, Optional
+from typing import Dict, Any, Union, List, Optional
+from io import TextIOBase, BufferedIOBase
 import os
 
 import numpy as np
@@ -17,11 +18,11 @@ class Laser:
     The pipeline is: ``Tokenizer.tokenize`` -> ``BPE.encode_tokens`` -> ``BPESentenceEmbedding.embed_bpe_sentences``
 
     Args:
-        bpe_codes (str or TextIO, optional): the path to LASER's BPE codes (``93langs.fcodes``),
+        bpe_codes (str or TextIOBase, optional): the path to LASER's BPE codes (``93langs.fcodes``),
             or a text-mode file object. If omitted, ``Laser.DEFAULT_BPE_CODES_FILE`` is used.
-        bpe_codes (str or TextIO, optional): the path to LASER's BPE vocabulary (``93langs.fvocab``),
+        bpe_codes (str or TextIOBase, optional): the path to LASER's BPE vocabulary (``93langs.fvocab``),
             or a text-mode file object. If omitted, ``Laser.DEFAULT_BPE_VOCAB_FILE`` is used.
-        encoder (str or BinaryIO, optional): the path to LASER's encoder PyToch model (``bilstm.93langs.2018-12-26.pt``),
+        encoder (str or BufferedIOBase, optional): the path to LASER's encoder PyToch model (``bilstm.93langs.2018-12-26.pt``),
             or a binary-mode file object. If omitted, ``Laser.DEFAULT_ENCODER_FILE`` is used.
         tokenizer_options (Dict[str, Any], optional): additional arguments to pass to the tokenizer.
             See ``.preprocessing.Tokenizer``.
@@ -43,9 +44,9 @@ class Laser:
                                         'bilstm.93langs.2018-12-26.pt')
 
     def __init__(self,
-                 bpe_codes: Optional[Union[str, TextIO]] = None,
-                 bpe_vocab: Optional[Union[str, TextIO]] = None,
-                 encoder: Optional[Union[str, BinaryIO]] = None,
+                 bpe_codes: Optional[Union[str, TextIOBase]] = None,
+                 bpe_vocab: Optional[Union[str, TextIOBase]] = None,
+                 encoder: Optional[Union[str, BufferedIOBase]] = None,
                  tokenizer_options: Optional[Dict[str, Any]] = None,
                  embedding_options: Optional[Dict[str, Any]] = None):
 

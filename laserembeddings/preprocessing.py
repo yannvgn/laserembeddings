@@ -1,11 +1,12 @@
-from typing import TextIO, Union, Optional
+from typing import Union, Optional
+from io import TextIOBase
 
 from sacremoses import MosesPunctNormalizer, MosesTokenizer
 from sacremoses.util import xml_unescape
 from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
 from transliterate import translit
 
-from .utils import BPECodesAdapter
+from .utils import adapt_bpe_codes
 
 # Extras
 try:
@@ -124,25 +125,25 @@ class BPE:
     BPE encoder.
 
     Args:
-        bpe_codes (str or TextIO): the path to LASER's BPE codes (``93langs.fcodes``),
+        bpe_codes (str or TextIOBase): the path to LASER's BPE codes (``93langs.fcodes``),
             or a text-mode file object.
-        bpe_codes (str or TextIO): the path to LASER's BPE vocabulary (``93langs.fvocab``),
+        bpe_codes (str or TextIOBase): the path to LASER's BPE vocabulary (``93langs.fvocab``),
             or a text-mode file object.
     """
 
-    def __init__(self, bpe_codes: Union[str, TextIO],
-                 bpe_vocab: Union[str, TextIO]):
+    def __init__(self, bpe_codes: Union[str, TextIOBase],
+                 bpe_vocab: Union[str, TextIOBase]):
 
         f_bpe_codes = None
         f_bpe_vocab = None
 
         try:
             if isinstance(bpe_codes, str):
-                f_bpe_codes = open(bpe_codes, 'r', encoding='utf-8')
+                f_bpe_codes = open(bpe_codes, 'r', encoding='utf-8')  # pylint: disable=consider-using-with
             if isinstance(bpe_vocab, str):
-                f_bpe_vocab = open(bpe_vocab, 'r', encoding='utf-8')
+                f_bpe_vocab = open(bpe_vocab, 'r', encoding='utf-8')  # pylint: disable=consider-using-with
 
-            self.bpe = subword_nmt_bpe(codes=BPECodesAdapter(f_bpe_codes
+            self.bpe = subword_nmt_bpe(codes=adapt_bpe_codes(f_bpe_codes
                                                              or bpe_codes),
                                        vocab=read_vocabulary(f_bpe_vocab
                                                              or bpe_vocab,
