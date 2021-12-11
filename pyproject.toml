@@ -9,7 +9,7 @@ repository = "https://github.com/yannvgn/laserembeddings"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.2"
 torch = "^1.0.1.post2"
 subword-nmt = "^0.3.6"
 numpy = "^1.15.4"
