@@ -88,7 +88,7 @@ def main():
         print_usage()
         return
 
-    if any([arg == '--help' for arg in sys.argv]):
+    if any(arg == '--help' for arg in sys.argv):
         print_usage()
         return
 
