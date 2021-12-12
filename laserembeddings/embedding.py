@@ -1,4 +1,5 @@
-from typing import Optional, List, Union, BinaryIO
+from typing import Optional, List, Union
+from io import BufferedIOBase
 
 import numpy as np
 
@@ -12,7 +13,7 @@ class BPESentenceEmbedding:
     LASER embeddings computation from BPE-encoded sentences.
 
     Args:
-        encoder (str or BinaryIO): the path to LASER's encoder PyTorch model,
+        encoder (str or BufferedIOBase): the path to LASER's encoder PyTorch model,
             or a binary-mode file object.
         max_sentences (int, optional): see ``.encoder.SentenceEncoder``.
         max_tokens (int, optional): see ``.encoder.SentenceEncoder``.
@@ -22,7 +23,7 @@ class BPESentenceEmbedding:
     """
 
     def __init__(self,
-                 encoder: Union[str, BinaryIO],
+                 encoder: Union[str, BufferedIOBase],
                  max_sentences: Optional[int] = None,
                  max_tokens: Optional[int] = 12000,
                  stable: bool = False,

@@ -3,7 +3,7 @@
 # - code formatting
 # - buffered_arange: fix to avoid unnecessary warning on PyTorch >= 1.4.0
 
-# pylint: disable=redefined-builtin, consider-using-enumerate, arguments-differ, fixme, abstract-method
+# pylint: disable=redefined-builtin, consider-using-enumerate, arguments-differ, fixme, abstract-method, consider-using-from-import
 
 from collections import namedtuple
 
@@ -192,8 +192,7 @@ class Encoder(nn.Module):
         x = x.transpose(0, 1)
 
         # pack embedded source tokens into a PackedSequence
-        packed_x = nn.utils.rnn.pack_padded_sequence(x,
-                                                     src_lengths.data.cpu())
+        packed_x = nn.utils.rnn.pack_padded_sequence(x, src_lengths.data.cpu())
 
         # apply LSTM
         if self.bidirectional:
