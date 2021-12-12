@@ -1,6 +1,6 @@
 # LASER embeddings
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yannvgn/laserembeddings/python-package?style=flat-square)](https://github.com/yannvgn/laserembeddings/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yannvgn/laserembeddings/Python%20package?style=flat-square)](https://github.com/yannvgn/laserembeddings/actions)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/laserembeddings?style=flat-square)
 [![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square)](https://pypi.org/project/laserembeddings/)
 [![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)](https://github.com/yannvgn/laserembeddings/blob/master/LICENSE)
