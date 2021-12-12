@@ -25,6 +25,10 @@ def test_laser():
         assert laser.embed_sentences('hello world!',
                                      lang='en').shape == (1, 1024)
 
+        with pytest.raises(ValueError):
+            laser.embed_sentences(['hello world!', "j'aime les pâtes"],
+                                  lang=['en'])
+
 
 def test_zh():
     if SKIP_ZH:

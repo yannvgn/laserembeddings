@@ -95,7 +95,7 @@ class Laser:
         Computes the LASER embeddings of provided sentences using the tokenizer for the specified language.
 
         Args:
-            sentences (List[str]): the sentences to compute the embeddings from.
+            sentences (str or List[str]): the sentences to compute the embeddings from.
             lang (str or List[str]): the language code(s) (ISO 639-1) used to tokenize the sentences
                 (either as a string - same code for every sentence - or as a list of strings - one code per sentence).
 
@@ -104,6 +104,12 @@ class Laser:
         """
         sentences = [sentences] if isinstance(sentences, str) else sentences
         lang = [lang] * len(sentences) if isinstance(lang, str) else lang
+
+        if len(sentences) != len(lang):
+            raise ValueError(
+                'lang: invalid length: the number of language codes does not match the number of sentences'
+            )
+
         with sre_performance_patch():  # see https://bugs.python.org/issue37723
             sentence_tokens = [
                 self._get_tokenizer(sentence_lang).tokenize(sentence)
