@@ -1,3 +1,9 @@
+<a name="1.1.2"></a>
+# [1.1.2](https://github.com/yannvgn/laserembeddings/compare/v1.1.1...v1.1.2) (2021-12-12)
+
+- A compatibility issue with subword-nmt 0.3.8 was fixed (#39) 🐛
+- The behavior of `Laser.embed_sentences` was unclear/misleading when the number of language codes received in the `lang` argument did not match the number of sentences to encode. It now raises an error in that case (#40) 🐛
+
 <a name="1.1.1"></a>
 # [1.1.1](https://github.com/yannvgn/laserembeddings/compare/v1.1.0...v1.1.1) (2021-02-06)
 

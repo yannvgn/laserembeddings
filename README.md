@@ -1,6 +1,6 @@
 # LASER embeddings
 
-[![Travis (.org) branch](https://img.shields.io/travis/yannvgn/laserembeddings/master?style=flat-square)](https://travis-ci.org/yannvgn/laserembeddings)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yannvgn/laserembeddings/python-package?style=flat-square)](https://github.com/yannvgn/laserembeddings/actions)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/laserembeddings?style=flat-square)
 [![PyPI](https://img.shields.io/pypi/v/laserembeddings.svg?style=flat-square)](https://pypi.org/project/laserembeddings/)
 [![PyPI - License](https://img.shields.io/pypi/l/laserembeddings.svg?style=flat-square)](https://github.com/yannvgn/laserembeddings/blob/master/LICENSE)
@@ -11,8 +11,9 @@
 
 _laserembeddings_ is a pip-packaged, production-ready port of Facebook Research's [LASER](https://github.com/facebookresearch/LASER) (Language-Agnostic SEntence Representations) to compute multilingual sentence embeddings.
 
-✨ **Version 1.1.1 is here! What's new?**
-- An issue with PyTorch 1.7.0 was fixed (#32) 🐛 Thank you, [@niklaskorz](https://github.com/niklaskorz)
+✨ **Version 1.1.2 is here! What's new?**
+- A compatibility issue with subword-nmt 0.3.8 was fixed (#39) 🐛
+- The behavior of `Laser.embed_sentences` was unclear/misleading when the number of language codes received in the `lang` argument did not match the number of sentences to encode. It now raises an error in that case 🐛
 
 ## Context
 
@@ -191,7 +192,3 @@ SIMILARITY_TEST=1 poetry run pytest tests/test_laser.py
 Now, have a coffee ☕️ and wait for the test to finish.
 
 The similarity report will be generated here: [tests/report/comparison-with-LASER.md](tests/report/comparison-with-LASER.md).
-
-
-
-
