@@ -87,6 +87,13 @@ def download_and_extract_test_data(output_dir):
 
     extract_tar(os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'),
                 output_dir)
+    
+    download_file(
+        'https://github.com/Thommy96/laserembeddings-test-data/releases/download/v1.0.0/laserembeddings2-test-data.tar.gz',
+        os.path.join(output_dir, 'laserembeddings2-test-data.tar.gz'))
+
+    extract_tar(os.path.join(output_dir, 'laserembeddings2-test-data.tar.gz'),
+                output_dir)
 
     print('')
     print(f'{CONSOLE_STARS} Ready to test all that!')
