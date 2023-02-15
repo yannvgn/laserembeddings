@@ -63,6 +63,15 @@ def download_models(output_dir):
     download_file(
         'https://dl.fbaipublicfiles.com/laser/models/bilstm.93langs.2018-12-26.pt',
         os.path.join(output_dir, 'bilstm.93langs.2018-12-26.pt'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.pt',
+        os.path.join(output_dir, 'laser2.pt'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.spm',
+        os.path.join(output_dir, 'laser2.spm'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.cvocab',
+        os.path.join(output_dir, 'laser2.cvocab'))
 
     print('')
     print(f'{CONSOLE_STARS} You\'re all set!')
