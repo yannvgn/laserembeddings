@@ -97,7 +97,9 @@ def test_similarity(mode='spm'):
 
             sents = test_data[f'{lang}_sentences']
             orig_embeddings = test_data[f'{lang}_embeddings']
-            embeddings = laser.embed_sentences(sents)
+
+            #lang is not used in spm mode
+            embeddings = laser.embed_sentences(sents, lang)
 
             assert embeddings.shape == orig_embeddings.shape
 
