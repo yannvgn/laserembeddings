@@ -5,6 +5,7 @@ from sacremoses import MosesPunctNormalizer, MosesTokenizer
 from sacremoses.util import xml_unescape
 from subword_nmt.apply_bpe import BPE as subword_nmt_bpe, read_vocabulary
 from transliterate import translit
+import sentencepiece
 
 from .utils import adapt_bpe_codes
 
@@ -159,3 +160,27 @@ class BPE:
     def encode_tokens(self, sentence_tokens: str) -> str:
         """Returns the BPE-encoded sentence from a tokenized sentence"""
         return self.bpe.process_line(sentence_tokens)
+
+###############################################################################
+#
+# Apply SPM
+#
+###############################################################################
+
+class SPM:
+    def __init__(self, spm_model: Union[str, TextIOBase]): 
+        self.spm = None
+        try:
+            if isinstance(spm_model, str):
+                self.spm = sentencepiece.SentencePieceProcessor(model_file=spm_model)
+        except FileNotFoundError:
+            pass
+    
+    def encode_sentence(self, sentence: str) -> str:
+        # NORM_PUNC + LC
+        normalizer = MosesPunctNormalizer(lang="en")
+        sentence = normalizer.normalize(sentence)
+        sentence = sentence.lower()
+
+        pieces = self.spm.encode_as_pieces(sentence)
+        return ' '.join(pieces)

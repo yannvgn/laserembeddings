@@ -63,6 +63,15 @@ def download_models(output_dir):
     download_file(
         'https://dl.fbaipublicfiles.com/laser/models/bilstm.93langs.2018-12-26.pt',
         os.path.join(output_dir, 'bilstm.93langs.2018-12-26.pt'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.pt',
+        os.path.join(output_dir, 'laser2.pt'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.spm',
+        os.path.join(output_dir, 'laser2.spm'))
+    download_file(
+        'https://dl.fbaipublicfiles.com/nllb/laser/laser2.cvocab',
+        os.path.join(output_dir, 'laser2.cvocab'))
 
     print('')
     print(f'{CONSOLE_STARS} You\'re all set!')
@@ -77,6 +86,13 @@ def download_and_extract_test_data(output_dir):
         os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'))
 
     extract_tar(os.path.join(output_dir, 'laserembeddings-test-data.tar.gz'),
+                output_dir)
+    
+    download_file(
+        'https://github.com/Thommy96/laserembeddings-test-data/releases/download/v1.0.0/laserembeddings2-test-data.tar.gz',
+        os.path.join(output_dir, 'laserembeddings2-test-data.tar.gz'))
+
+    extract_tar(os.path.join(output_dir, 'laserembeddings2-test-data.tar.gz'),
                 output_dir)
 
     print('')
