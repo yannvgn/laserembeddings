@@ -16,7 +16,7 @@ class Laser:
     End-to-end LASER embedding.
 
     The pipeline is: ``Tokenizer.tokenize`` -> ``BPE.encode_tokens`` -> ``BPESentenceEmbedding.embed_bpe_sentences``
-    Using spm model: ``Tokenizer.tokenize`` -> ``SPM.encode_tokens`` -> ``SPMSentenceEmbedding.embed_spm_sentences``
+    Using spm model: ``Tokenizer.tokenize`` -> ``SPM.encode_sentence`` -> ``SPMSentenceEmbedding.embed_spm_sentences``
 
     Args:
         mode (str): spm or bpe
