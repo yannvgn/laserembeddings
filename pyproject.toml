@@ -10,7 +10,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-torch = "^1.0.1.post2"
+torch = "^1.0.1.post2,^2.0.0"
 subword-nmt = "^0.3.6"
 numpy = "^1.15.4"
 sacremoses = "0.0.35"
